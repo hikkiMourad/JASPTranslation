@@ -6,5 +6,5 @@ public interface RequestService {
 
 	public JRequest findByTextOrigine(String textOrigine);
 	public JRequest save(JRequest request);
-	public JRequest translate(JRequest request);
+	public JRequest translate(JRequest request) throws Exception;
 }

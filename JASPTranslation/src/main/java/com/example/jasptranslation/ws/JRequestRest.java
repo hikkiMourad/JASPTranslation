@@ -18,8 +18,8 @@ public class JRequestRest {
 
 	
 	
-	@PostMapping("translate/")
-	public JRequest translate(@RequestBody JRequest request) {
+	@PostMapping("/")
+	public JRequest translate(@RequestBody JRequest request) throws Exception {
 		return requestService.translate(request);
 	}
 	
