@@ -1,9 +1,12 @@
 package com.example.jasptranslation.bean;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class JRequest {
@@ -15,6 +18,9 @@ public class JRequest {
 	private String langOrigine;
 	private String textResult;
 	private String langResult;
+	@OneToMany(mappedBy = "jRequest")
+	private List<PdfLink> pdflinks;
+	private List<String> pdfTranslation;
 	public Long getId() {
 		return id;
 	}
@@ -45,6 +51,19 @@ public class JRequest {
 	public void setLangResult(String langResult) {
 		this.langResult = langResult;
 	}
+	public List<PdfLink> getPdflinks() {
+		return pdflinks;
+	}
+	public void setPdflinks(List<PdfLink> pdflinks) {
+		this.pdflinks = pdflinks;
+	}
+	public List<String> getPdfTranslation() {
+		return pdfTranslation;
+	}
+	public void setPdfTranslation(List<String> pdfTranslation) {
+		this.pdfTranslation = pdfTranslation;
+	}
+	
 	
 	
 	
