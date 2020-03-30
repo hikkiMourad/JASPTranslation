@@ -24,3 +24,10 @@ public class JRequestRest {
 	}
 	
 }
+/*  --- Exemple de d'une requete pour traduire une liste de PDF a l'aide des lien http ---
+{
+"pdflinks" : [
+	{"url" : "http://www.africau.edu/images/default/sample.pdf"},{"url" : "http://www.africau.edu/images/default/sample.pdf"}
+	]
+}
+*/
