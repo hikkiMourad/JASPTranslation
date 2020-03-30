@@ -7,7 +7,7 @@ import com.example.jasptranslation.bean.PdfLink;
 
 public interface PdfLinkService {
 
-	public List<PdfLink> findByJRequestId(Long Id);
+	public List<PdfLink> findByJrequestId(Long Id);
 	public List<PdfLink> findByUrl(URL url);
 	public PdfLink save(PdfLink link);
 }

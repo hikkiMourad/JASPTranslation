@@ -18,9 +18,10 @@ public class JRequest {
 	private String langOrigine;
 	private String textResult;
 	private String langResult;
-	@OneToMany(mappedBy = "jRequest")
+	@OneToMany(mappedBy = "jrequest")
 	private List<PdfLink> pdflinks;
-	private List<String> pdfTranslation;
+	@OneToMany(mappedBy = "jrequest")
+	private List<PdfTranslationString> translationStrings;
 	public Long getId() {
 		return id;
 	}
@@ -57,12 +58,14 @@ public class JRequest {
 	public void setPdflinks(List<PdfLink> pdflinks) {
 		this.pdflinks = pdflinks;
 	}
-	public List<String> getPdfTranslation() {
-		return pdfTranslation;
+	public List<PdfTranslationString> getTranslationStrings() {
+		return translationStrings;
 	}
-	public void setPdfTranslation(List<String> pdfTranslation) {
-		this.pdfTranslation = pdfTranslation;
+	public void setTranslationStrings(List<PdfTranslationString> translationStrings) {
+		this.translationStrings = translationStrings;
 	}
+	
+	
 	
 	
 	

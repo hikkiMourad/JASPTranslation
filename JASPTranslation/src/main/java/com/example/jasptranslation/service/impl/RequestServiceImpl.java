@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.example.jasptranslation.bean.JRequest;
 import com.example.jasptranslation.dao.RequestDao;
 import com.example.jasptranslation.service.facade.RequestService;
+import com.example.jasptranslation.util.ReadPdf;
 import com.example.jasptranslation.util.YandexApiConnection;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -44,9 +45,9 @@ public class RequestServiceImpl implements RequestService {
 	@Override
 	public JRequest translate(JRequest jrequest) throws Exception {
 		YandexApiConnection connect = new YandexApiConnection();
+		ReadPdf readPdf = new ReadPdf();
 		if (jrequest.getPdflinks().size() != 0) {
-			jrequest.getPdflinks().forEach(e -> System.out.println(e.getUrl().toString()));
-			return jrequest;
+			return readPdf.pdfToString(jrequest);
 		} else {
 			if (jrequest.getTextOrigine() == "") {
 				jrequest.setTextOrigine("erreue dans la requete");

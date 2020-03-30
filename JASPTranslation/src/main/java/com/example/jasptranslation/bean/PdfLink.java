@@ -16,7 +16,7 @@ public class PdfLink {
 	private Long id;
 	private URL url;
 	@ManyToOne
-	private JRequest jRequest;
+	private JRequest jrequest;
 	public Long getId() {
 		return id;
 	}

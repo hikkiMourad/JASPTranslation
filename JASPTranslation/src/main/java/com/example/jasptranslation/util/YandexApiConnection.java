@@ -30,6 +30,7 @@ public class YandexApiConnection {
     }
 	
 	public JRequest postConnect(JRequest jRequest) throws Exception {
+
 		HttpClient httpClient = HttpClient.newBuilder()
 	            .version(HttpClient.Version.HTTP_2)
 	            .build();
@@ -55,5 +56,37 @@ public class YandexApiConnection {
         jRequest.setLangOrigine(lang.get("lang"));
         jRequest.setLangResult("fr");
         return jRequest;
+	}
+	
+	public String stringTranslation(String text) {
+		try {
+			HttpClient httpClient = HttpClient.newBuilder()
+		            .version(HttpClient.Version.HTTP_2)
+		            .build();
+			URI link = new URI("https://translate.yandex.net/api/v1.5/tr.json/translate?lang=fr&key=trnsl.1.1.20200319T151952Z.9235896eb67ed1dd.e6da4cce904e8141b3b1cb3edc87ccff2a1b45d0&options=1");
+			Map<Object, Object> data = new HashMap();
+	        data.put("text", text);
+	       
+
+	        HttpRequest request = HttpRequest.newBuilder()
+	                .POST(buildFormDataFromMap(data))
+	                .uri(link)
+	                .setHeader("User-Agent", "Java 11 HttpClient Bot")
+	                .header("Content-Type", "application/x-www-form-urlencoded")
+	                .build();
+
+	        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+	        ObjectMapper mapper = new ObjectMapper();
+	        Map<String, Object> reponse = mapper.readValue(response.body(), Map.class);
+	        System.out.println(response.body());
+	        ArrayList responseArray =   (ArrayList) reponse.get("text");
+	        
+	        return (String) responseArray.get(0);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "error";
+		}
+		
+		
 	}
 }

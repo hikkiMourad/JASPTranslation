@@ -17,8 +17,8 @@ public class PdfLinkServiceImpl implements PdfLinkService {
 	PdfLinkDao pdfLinkDao;
 
 	@Override
-	public List<PdfLink> findByJRequestId(Long Id) {
-		return pdfLinkDao.findByJRequestId(Id);
+	public List<PdfLink> findByJrequestId(Long Id) {
+		return pdfLinkDao.findByJrequestId(Id);
 	}
 
 	@Override
