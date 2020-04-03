@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.jasptranslation.bean.JRequest;
+import com.example.jasptranslation.bean.PdfTranslateLink;
+import com.example.jasptranslation.bean.StringTranslate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class YandexApiConnection {
@@ -29,14 +30,17 @@ public class YandexApiConnection {
         return HttpRequest.BodyPublishers.ofString(builder.toString());
     }
 	
-	public JRequest postConnect(JRequest jRequest) throws Exception {
+	public StringTranslate translateString(StringTranslate stringTranslate) throws Exception {
 
 		HttpClient httpClient = HttpClient.newBuilder()
 	            .version(HttpClient.Version.HTTP_2)
 	            .build();
-		URI link = new URI("https://translate.yandex.net/api/v1.5/tr.json/translate?lang=fr&key=trnsl.1.1.20200319T151952Z.9235896eb67ed1dd.e6da4cce904e8141b3b1cb3edc87ccff2a1b45d0&options=1");
+		if (stringTranslate.getLangResult() == null) {
+			stringTranslate.setLangResult("fr");
+		}
+		URI link = new URI("https://translate.yandex.net/api/v1.5/tr.json/translate?lang="+stringTranslate.getLangResult()+"&key=trnsl.1.1.20200319T151952Z.9235896eb67ed1dd.e6da4cce904e8141b3b1cb3edc87ccff2a1b45d0&options=1");
 		Map<Object, Object> data = new HashMap();
-        data.put("text", jRequest.getTextOrigine());
+        data.put("text", stringTranslate.getTextOrigine());
        
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -45,25 +49,27 @@ public class YandexApiConnection {
                 .setHeader("User-Agent", "Java 11 HttpClient Bot")
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
-
+        System.out.println(request.toString());
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> reponse = mapper.readValue(response.body(), Map.class);
         System.out.println(response.body());
         ArrayList text =   (ArrayList) reponse.get("text");
         Map<String, String> lang  = (Map<String, String>) reponse.get("detected"); 
-        jRequest.setTextResult((String) text.get(0));
-        jRequest.setLangOrigine(lang.get("lang"));
-        jRequest.setLangResult("fr");
-        return jRequest;
+        stringTranslate.setTextResult((String) text.get(0));
+        stringTranslate.setLangOrigine(lang.get("lang"));
+        return stringTranslate;
 	}
 	
-	public String stringTranslation(String text) {
+	public String stringTranslation(String text,String toLang) {
 		try {
 			HttpClient httpClient = HttpClient.newBuilder()
 		            .version(HttpClient.Version.HTTP_2)
 		            .build();
-			URI link = new URI("https://translate.yandex.net/api/v1.5/tr.json/translate?lang=fr&key=trnsl.1.1.20200319T151952Z.9235896eb67ed1dd.e6da4cce904e8141b3b1cb3edc87ccff2a1b45d0&options=1");
+			if (toLang == null) {
+				toLang = "fr";
+			}
+			URI link = new URI("https://translate.yandex.net/api/v1.5/tr.json/translate?lang="+toLang+"&key=trnsl.1.1.20200319T151952Z.9235896eb67ed1dd.e6da4cce904e8141b3b1cb3edc87ccff2a1b45d0&options=1");
 			Map<Object, Object> data = new HashMap();
 	        data.put("text", text);
 	       

@@ -1,47 +1,37 @@
 package com.example.jasptranslation.bean;
 
-import java.net.URL;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
-public class PdfLink {
+
+public class TranslateUploadedPdf {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private URL url;
 	
-	@ManyToOne
-	private PdfTranslateLink pdfTranslateLink;
-	
+	private byte[] file;
 	@Column(length = 1000000)
 	private String translationResult;
-	
 	private String toLang;
-	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public URL getUrl() {
-		return url;
+	
+	public byte[] getFile() {
+		return file;
 	}
-	public void setUrl(URL url) {
-		this.url = url;
-	}
-	public PdfTranslateLink getPdfTranslateLink() {
-		return pdfTranslateLink;
-	}
-	public void setPdfTranslateLink(PdfTranslateLink pdfTranslateLink) {
-		this.pdfTranslateLink = pdfTranslateLink;
+	public void setFile(byte[] file) {
+		this.file = file;
 	}
 	public String getTranslationResult() {
 		return translationResult;
@@ -55,8 +45,6 @@ public class PdfLink {
 	public void setToLang(String toLang) {
 		this.toLang = toLang;
 	}
-	
-	
 	
 	
 	

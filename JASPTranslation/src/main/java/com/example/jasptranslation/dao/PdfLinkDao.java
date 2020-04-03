@@ -9,7 +9,5 @@ import com.example.jasptranslation.bean.PdfLink;
 
 public interface PdfLinkDao extends JpaRepository<PdfLink, Long>{
 
-	public List<PdfLink> findByJrequestId(Long Id);
-	public List<PdfLink> findByUrl(URL url);
-	
+	public List<PdfLink> findByUrlAndToLang(URL url,String toLang);
 }

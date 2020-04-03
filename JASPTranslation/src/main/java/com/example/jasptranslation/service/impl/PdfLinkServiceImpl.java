@@ -16,14 +16,10 @@ public class PdfLinkServiceImpl implements PdfLinkService {
 	@Autowired
 	PdfLinkDao pdfLinkDao;
 
-	@Override
-	public List<PdfLink> findByJrequestId(Long Id) {
-		return pdfLinkDao.findByJrequestId(Id);
-	}
 
 	@Override
-	public List<PdfLink> findByUrl(URL url) {
-		return pdfLinkDao.findByUrl(url);
+	public List<PdfLink> findByUrlAndToLang(URL url,String toLang) {
+		return pdfLinkDao.findByUrlAndToLang(url, toLang);
 	}
 
 	@Override
