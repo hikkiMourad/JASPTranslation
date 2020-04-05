@@ -11,6 +11,5 @@ import com.example.jasptranslation.bean.TranslateUploadedPdf;
 @Repository
 public interface TranslateUploadedPdfDao extends JpaRepository<TranslateUploadedPdf, Long> {
 
-	public List<TranslateUploadedPdf> findByFileAndToLang(MultipartFile file,String toLang);
-	
+	public List<TranslateUploadedPdf> findByFile(byte[] file);
 }

@@ -8,7 +8,7 @@ import com.example.jasptranslation.bean.TranslateUploadedPdf;
 
 public interface TranslateUploadedPdfService {
 
-	public List<TranslateUploadedPdf> findByFileAndToLang(MultipartFile file,String toLang);
+	public List<TranslateUploadedPdf> findByFile(byte[] file);
 	public TranslateUploadedPdf save(TranslateUploadedPdf translateUploadedPdf);
 	public TranslateUploadedPdf translate(String toLang,MultipartFile file );
 }

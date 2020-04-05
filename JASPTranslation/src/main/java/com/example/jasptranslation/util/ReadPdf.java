@@ -49,4 +49,38 @@ public class ReadPdf {
 			pdfLink.setTranslationResult(pdfFileInText);
 		return pdfLink;
 	}
+	
+	public String translateFromBytes(byte[] bytes,String toLang) {
+		YandexApiConnection yandexApiConnection = new YandexApiConnection();
+		String pdfFileInText = null;
+			
+			try (PDDocument document = PDDocument.load(bytes)) {
+
+	            document.getClass();
+
+	            if (!document.isEncrypted()) {
+				
+	                PDFTextStripperByArea stripper = new PDFTextStripperByArea();
+	                stripper.setSortByPosition(true);
+
+	                PDFTextStripper tStripper = new PDFTextStripper();
+
+	               
+	                
+	                pdfFileInText = tStripper.getText(document);
+	                pdfFileInText =  yandexApiConnection.stringTranslation(pdfFileInText,toLang);
+	                if (pdfFileInText.length() > 10000) {
+	                	pdfFileInText = "more than 10000 char";
+					}
+	               	                	
+	            }
+
+	        }
+			catch (Exception e) {
+				System.out.println("erreur2 " + e.getMessage());
+			}
+			
+			return pdfFileInText;
+	}
+
 }

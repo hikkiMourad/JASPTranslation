@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.web.multipart.MultipartFile;
-
 @Entity
 
 public class TranslateUploadedPdf {
@@ -15,7 +13,7 @@ public class TranslateUploadedPdf {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+	@Column(length = 10000)
 	private byte[] file;
 	@Column(length = 1000000)
 	private String translationResult;
@@ -45,6 +43,8 @@ public class TranslateUploadedPdf {
 	public void setToLang(String toLang) {
 		this.toLang = toLang;
 	}
+	
+	
 	
 	
 	
